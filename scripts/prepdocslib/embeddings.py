@@ -34,7 +34,7 @@ class OpenAIEmbeddings(ABC):
 
     SUPPORTED_BATCH_AOAI_MODEL = {"text-embedding-ada-002": {"token_limit": 8100, "max_batch_size": 16}}
 
-    def __init__(self, open_ai_model_name: str, disable_batch: bool = False, verbose: bool = False):
+    def __init__(self, open_ai_model_name: str, disable_batch: bool = True, verbose: bool = False):
         self.open_ai_model_name = open_ai_model_name
         self.disable_batch = disable_batch
         self.verbose = verbose
@@ -88,8 +88,8 @@ class OpenAIEmbeddings(ABC):
         for batch in batches:
             async for attempt in AsyncRetrying(
                 retry=retry_if_exception_type(RateLimitError),
-                wait=wait_random_exponential(min=15, max=60),
-                stop=stop_after_attempt(15),
+                wait=wait_random_exponential(min=60, max=120),
+                stop=stop_after_attempt(100),
                 before_sleep=self.before_retry_sleep,
             ):
                 with attempt:
@@ -104,8 +104,8 @@ class OpenAIEmbeddings(ABC):
         client = await self.create_client()
         async for attempt in AsyncRetrying(
             retry=retry_if_exception_type(RateLimitError),
-            wait=wait_random_exponential(min=15, max=60),
-            stop=stop_after_attempt(15),
+            wait=wait_random_exponential(min=60, max=120),
+            stop=stop_after_attempt(100),
             before_sleep=self.before_retry_sleep,
         ):
             with attempt:

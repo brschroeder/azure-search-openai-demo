@@ -14,7 +14,7 @@ const Layout = () => {
             <header className={styles.header} role={"banner"}>
                 <div className={styles.headerContainer}>
                     <Link to="/" className={styles.headerTitleContainer}>
-                        <h3 className={styles.headerTitle}>GPT + Enterprise data | Sample</h3>
+                        <h3 className={styles.headerTitle}>Brett's GPT | Trained on Private Data</h3>
                     </Link>
                     <nav>
                         <ul className={styles.headerNavList}>
@@ -29,7 +29,8 @@ const Layout = () => {
                                 </NavLink>
                             </li>
                             <li className={styles.headerNavLeftMargin}>
-                                <a href="https://aka.ms/entgptsearch" target={"_blank"} title="Github repository link">
+                                {/* <a href="https://aka.ms/entgptsearch" target={"_blank"} title="Github repository link"> */}
+                                <a href="https://github.com/brschroeder/azure-search-openai-demo" target={"_blank"} title="Github repository link">
                                     <img
                                         src={github}
                                         alt="Github logo"
@@ -42,7 +43,7 @@ const Layout = () => {
                             </li>
                         </ul>
                     </nav>
-                    <h4 className={styles.headerRightText}>Azure OpenAI + AI Search</h4>
+                    <h4 className={styles.headerRightText}>Runs on Azure, uses OpenAI API under the hood</h4>
                     {useLogin && <LoginButton />}
                 </div>
             </header>
